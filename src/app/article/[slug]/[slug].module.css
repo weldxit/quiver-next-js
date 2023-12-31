@@ -23,6 +23,12 @@
   /* flex-direction: column; */
   justify-content: center; /* Distribute space between article and related articles */
 }
+.next-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  /* Additional styles */
+}
 
 .article-container {
   width: 79.5rem; /* Adjust width for the article */
@@ -36,11 +42,19 @@
   /* max-height: 1%; */
   max-width: 30%; /* Adjust width for the related articles */
   display: flex;
-  max-height: 125vh;
-  overflow-y: auto;
+  max-height: 130vh;
+  overflow-y: scroll;
   flex-direction: column;
   justify-content: flex-start;
   /* gap: 20px; */
+}
+.active-related {
+  background-color: #dd3b3b; /* Adjust to your desired active color */
+}
+.related-container .active-related {
+  /* Adjust as needed for the scroll position */
+  scroll-margin-block: 20px; /* Creates space above the active element */
+  scroll-margin-top: 20px; /* Controls the top space for the active element */
 }
 .scroll-down{
   padding-left: 1.4rem;

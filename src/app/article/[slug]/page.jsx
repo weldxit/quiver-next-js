@@ -1,9 +1,10 @@
-// 'use client'
+"use client";
 import Image from "next/image";
 import styles from "./[slug].module.css";
 import Link from "next/link";
 import ConfettiComponent from "@/components/Confetti/Confetti";
 import RelatedArticle from "@/components/RelatedNewsCard/RelatedArticle";
+import { useCallback, useEffect, useState } from "react";
 const fetchArticle = async (id) => {
   // console.log(id, "here");
   try {
@@ -89,42 +90,104 @@ function findCategory(id) {
   const foundItem = tags.find((item) => item.id === id);
 
   if (foundItem) {
-    // console.log(foundItem.name); // Log the category name if found
     return foundItem.name; // Return the category name
   }
 
-  return null; // Return null if category with the ID is not found
+  return null;
 }
-export default async function Snglearticle({ params }) {
-  const { slug } = params;
-  const article = await fetchArticle(slug);
-  const relatedNews = await fetchRelated();
-  console.log(article, "rti");
-  const { formattedDate, formattedTime } = formatDate(article[0].posted_at);
-  const categoty = findCategory(article[0].category_id);
-  console.log(categoty);
-  const textWithNewLines = article[0].content; // Assuming article[0].content holds the provided text
 
-  const splitText = textWithNewLines.split("\n");
+export default function Snglearticle({ params }) {
+  const [article, setArticle] = useState([]);
+  const [category, setCategory] = useState("");
+  const [relatedNews, setRelatedNews] = useState([]);
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [stack, setStack] = useState([]);
 
-  const contentWithBreaks = splitText.map((line, index) => (
-    <p key={index}>{line}</p>
-  ));
+  const handleNext = useCallback((index) => {
+    if (index >= 0 && index < relatedNews.length) {
+      const selectedArticle = relatedNews[index];
+      setArticle(selectedArticle);
+      const poppedArticle = relatedNews.pop(); // Remove last article from relatedNews
+      setRelatedNews([...relatedNews]); // Update relatedNews state
+      console.log(poppedArticle,'poped')
+      setStack([...stack, poppedArticle]); // Add the removed article to the stack
+    }
+  },[relatedNews,stack])
+
+  const handleBack = useCallback((index) => {
+    if (index >= 0 && index < relatedNews.length) {
+      const selectedArticle = relatedNews[index];
+      setArticle(selectedArticle);
+      const poppedArticle = relatedNews.pop(); // Remove last article from relatedNews
+      setRelatedNews([...relatedNews]); // Update relatedNews state
+      console.log(poppedArticle,'poped')
+      setStack([...stack, poppedArticle]); // Add the removed article to the stack
+    }
+  },[relatedNews,stack])
+  // useEffect(()=>{
+  //   handleNext(activeIndex+1)
+  // },[handleNext])
+  // When clicking the "Back" button
+
+  // useEffect(()=>{
+  //   updateArticle()
+  // })
+  useEffect(() => {
+    const { slug } = params;
+
+    const fetchData = async () => {
+      try {
+        const fetchedArticle = await fetchArticle(slug);
+        console.log(fetchedArticle, "fetched");
+        if (fetchedArticle && fetchedArticle.length > 0) {
+          const { formattedDate, formattedTime } = formatDate(
+            fetchedArticle[0].posted_at
+          );
+          const articleCategory = findCategory(fetchedArticle[0].category_id);
+
+          setArticle(fetchedArticle[0]);
+          setCategory(articleCategory || "");
+          setDate(formattedDate);
+          setTime(formattedTime);
+        }
+
+        const fetchedRelatedNews = await fetchRelated();
+        setRelatedNews(fetchedRelatedNews || []);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [params]);
+  let contentWithBreaks = "";
+  if (article) {
+    console.log(article, category, relatedNews, date, time);
+    const textWithNewLines = article.content;
+    const splitText = textWithNewLines?.split("\n");
+    contentWithBreaks = splitText?.map((line, index) => (
+      <p key={index}>{line}</p>
+    ));
+  }
+
   let index = 0;
   return (
     <div className={styles["main"]}>
       <div className={styles["container"]}>
         <div className={styles["article-container"]}>
           <div className={styles["cat-time"]}>
-            <span className={styles["category"]}>/{categoty}</span>
+            <span className={styles["category"]}>/{category}</span>
             <span className={styles["timestamp"]}>
-              {formattedDate} | {formattedTime}
+              {date} | {time}
             </span>
           </div>
 
-          <h1 className={styles["article-title"]}>{article[0].title}</h1>
+          <h1 className={styles["article-title"]}>{article.title}</h1>
           <Image
-            src={article[0].image}
+            src={article.image}
             alt={"image"}
             className={styles["article-image"]}
             width={200}
@@ -148,26 +211,35 @@ export default async function Snglearticle({ params }) {
                   content={news.content}
                   imageLink={news.image}
                   postedAt={news.posted_at}
+      
                 />
               </Link>
             );
           })}
         </div>
         <div className={styles["next-prev"]}>
-          <Link href={{ pathname: `/article/${relatedNews[1].id}` }}>
+          <button
+            onClick={() => handleNext(currentIndex + 1)}
+            className={styles["next-button"]}
+          >
             <Image
               src={"/assets/pagignation/active-greaterthan.png"}
               alt="next"
               width={30}
               height={30}
             />
-          </Link>
-          <Image
-            src={"/assets/pagignation/active-lessthan.png"}
-            alt="next"
-            width={30}
-            height={30}
-          />
+          </button>
+          <button
+            onClick={() => handleBack(currentIndex - 1)}
+            className={styles["next-button"]}
+          >
+            <Image
+              src={"/assets/pagignation/active-lessthan.png"}
+              alt="next"
+              width={30}
+              height={30}
+            />
+          </button>
         </div>
       </div>
       <div className={styles["confetti"]}>
