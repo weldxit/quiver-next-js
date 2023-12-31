@@ -1,0 +1,49 @@
+/* Navbar.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    align-items: center; /* Added for center alignment */
+    padding: 1rem; /* Added padding for better spacing */
+  }
+  
+  .banner-image-container {
+    margin-bottom: 1rem; /* Added margin at the bottom */
+  }
+  
+  .updates-scroller-container {
+    /* Add styles for updates scroller if needed */
+  }
+  
+  .category-route-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    gap: 0.5rem; /* Add gap between buttons */
+    justify-content: center; /* Center the buttons */
+  }
+  
+  .buttons {
+    display: flex;
+    align-items: center; /* Align text vertically */
+    justify-content: center; /* Center text horizontally */
+    text-align: center; /* Center text in button */
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(28, 26, 26);
+    color: white;
+    padding: 0.8rem 1rem;
+    /* margin: 0.3rem; Adjust margin for spacing between buttons */
+    text-decoration: none; /* Remove default link underline */
+    transition: background-color 0.3s ease;
+  }
+  
+  .buttons:hover {
+    background-color: #333; /* Darken the button on hover */
+  }
+  
+  .text {
+    font-size: 1rem; /* Adjust font size */
+    font-weight: bold;
+  }
+  

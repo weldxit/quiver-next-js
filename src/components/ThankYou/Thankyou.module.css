@@ -1,0 +1,21 @@
+/* styles/ThankYouCard.module.css */
+
+.card {
+    width: 200px;
+    height: 150px;
+    background-color: #ffcc00;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Add styles for confetti animation if needed */
+  

@@ -1,0 +1,38 @@
+  /* components/NewsContainer.module.css */
+  .news-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    
+  }
+  .grid-container{
+    display: flex;
+    justify-content: center;
+    /* height: 96vh; */
+  }
+  .center {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    
+  }
+
+  .not-found {
+    display: flex;
+    flex: 1;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+  .image{
+  
+  }
+  @media screen and (max-width: 768px) {
+    /* Adjust for smaller screens */
+    .news-container {
+      justify-content: center;
+    }
+  }
