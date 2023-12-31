@@ -4,7 +4,7 @@ import styles from "./[slug].module.css";
 import Link from "next/link";
 import ConfettiComponent from "@/components/Confetti/Confetti";
 import RelatedArticle from "@/components/RelatedNewsCard/RelatedArticle";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 const fetchArticle = async (id) => {
   // console.log(id, "here");
   try {
@@ -104,34 +104,15 @@ export default function Snglearticle({ params }) {
   const [time, setTime] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [stack, setStack] = useState([]);
 
-  const handleNext = useCallback((index) => {
+  const updateArticle = (index) => {
     if (index >= 0 && index < relatedNews.length) {
       const selectedArticle = relatedNews[index];
       setArticle(selectedArticle);
-      const poppedArticle = relatedNews.pop(); // Remove last article from relatedNews
-      setRelatedNews([...relatedNews]); // Update relatedNews state
-      console.log(poppedArticle,'poped')
-      setStack([...stack, poppedArticle]); // Add the removed article to the stack
+      setCurrentIndex(index);
+      setActiveIndex(index);
     }
-  },[relatedNews,stack])
-
-  const handleBack = useCallback((index) => {
-    if (index >= 0 && index < relatedNews.length) {
-      const selectedArticle = relatedNews[index];
-      setArticle(selectedArticle);
-      const poppedArticle = relatedNews.pop(); // Remove last article from relatedNews
-      setRelatedNews([...relatedNews]); // Update relatedNews state
-      console.log(poppedArticle,'poped')
-      setStack([...stack, poppedArticle]); // Add the removed article to the stack
-    }
-  },[relatedNews,stack])
-  // useEffect(()=>{
-  //   handleNext(activeIndex+1)
-  // },[handleNext])
-  // When clicking the "Back" button
-
+  };
   // useEffect(()=>{
   //   updateArticle()
   // })
@@ -219,7 +200,7 @@ export default function Snglearticle({ params }) {
         </div>
         <div className={styles["next-prev"]}>
           <button
-            onClick={() => handleNext(currentIndex + 1)}
+            onClick={() => updateArticle(currentIndex + 1)}
             className={styles["next-button"]}
           >
             <Image
@@ -230,7 +211,7 @@ export default function Snglearticle({ params }) {
             />
           </button>
           <button
-            onClick={() => handleBack(currentIndex - 1)}
+            onClick={() => updateArticle(currentIndex - 1)}
             className={styles["next-button"]}
           >
             <Image
