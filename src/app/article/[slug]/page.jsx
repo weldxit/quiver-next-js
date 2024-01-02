@@ -120,7 +120,7 @@ export default function Snglearticle({ params }) {
     const fetchData = async () => {
       try {
         const fetchedArticle = await fetchArticle(slug);
-        console.log(fetchedArticle, "fetched");
+        // console.log(fetchedArticle, "fetched");
         if (fetchedArticle && fetchedArticle.length > 0) {
           const { formattedDate, formattedTime } = formatDate(
             fetchedArticle[0].posted_at
@@ -163,15 +163,23 @@ export default function Snglearticle({ params }) {
               {date} | {time}
             </span>
           </div>
-
-          <h1 className={styles["article-title"]}>{article.title}</h1>
-          <Image
+          {
+            article && article.title ? <h1 className={styles["article-title"]}>{article.title}</h1> : <h1 className={styles["article-title"]}>loading content for you..</h1>
+          }
+          
+         {article && article.image ? <Image
             src={article.image}
             alt={"image"}
             className={styles["article-image"]}
             width={200}
             height={200}
-          />
+          /> : <Image
+          src={'/placeholder.png'}
+          alt={"image"}
+          className={styles["article-image"]}
+          width={200}
+          height={200}
+        />}
 
           <div className={styles["article-content"]}>
             <p>{contentWithBreaks}</p>
