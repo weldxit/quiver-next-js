@@ -8,7 +8,7 @@ import Norecord from "@/components/NoRecord/Norecord";
 const getnewsBycategory = async (catid,page) => {
 
   try {
-    const result = await fetch(`http://localhost:3001/category-web/${catid}?page=${page}`, {cache:"no-store"});
+    const result = await fetch(`http://localhost:3001/category-web/${catid}?page=${page}`, {next:{revalidate:60}});
     if (!result.ok) {
       throw new Error("Failed to fetch data");
     }
@@ -32,7 +32,7 @@ export default async function SingleCategory({ searchParams }) {
   page = !page || page < 1 ? 1 : page;
   // const id = 18
   const {posts,pages} = await getnewsBycategory(id,page);
-  console.log(pages)
+  // console.log(pages)
   const prevPage = page - 1 > 0 ? page - 1 : 1;
   const nextPage = page + 1;
 

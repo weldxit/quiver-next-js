@@ -10,7 +10,6 @@ const fetchArticle = async (id) => {
   try {
     const result = await fetch(`http://localhost:3001/todays_news/${id}`, {
       next: { revalidate: 120 },
-      cache: "no-store",
     });
     if (!result.ok) {
       throw new Error("Failed to fetch data");
@@ -26,7 +25,6 @@ const fetchRelated = async () => {
   try {
     const result = await fetch(`http://localhost:3001/maymisseddata`, {
       next: { revalidate: 60 },
-      cache: "no-store",
     });
     if (!result.ok) {
       throw new Error("Failed to fetch data");
@@ -180,7 +178,7 @@ export default function Snglearticle({ params }) {
           </div>
         </div>
         <div className={styles['thank-you-container']}>
-          thanks a lot 
+          Thanks For Reading....
         </div>
         <div className={styles["related-container"]}>
           <span className={styles["scroll-down"]}>Scroll down for more..</span>

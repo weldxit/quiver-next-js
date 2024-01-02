@@ -1,18 +1,20 @@
+// 
 
-const withPWA = require("next-pwa");
-
-module.exports = withPWA({
-  pwa: {
-    dest: "public",
-    register: true,
-    skipWaiting: true,
-  },
-  images:{
-    remotePatterns:[
-        {
-            protocol:'https',
-            hostname:'firebasestorage.googleapis.com'
-        }
-    ]
-}
-});
+const withPWA = require("next-pwa")({
+    dest : "public",
+    register : true,
+    skipWaiting : true
+  })
+  const nextConfig = withPWA({
+    reactStrictMode: true,
+    images:{
+        remotePatterns:[
+            {
+                protocol:'https',
+                hostname:'firebasestorage.googleapis.com'
+            }
+        ]
+    }
+  }
+  )
+  module.exports = nextConfig

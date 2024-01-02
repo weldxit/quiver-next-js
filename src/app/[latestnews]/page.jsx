@@ -20,7 +20,7 @@ export default  function SingleCategory({ params, searchParams}) {
   const getnewsLatest = async () => {
     // console.log(catid,page);
     try {
-      const result = await fetch(`http://localhost:3001/todays_news_web`, {cache:"no-store"});
+      const result = await fetch(`https://server-for-quiver.onrender.com/todays_news_web`,{next:{revalidate:60}});
       if (!result.ok) {
         throw new Error("Failed to fetch data");
       }

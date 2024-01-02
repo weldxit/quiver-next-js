@@ -6,9 +6,8 @@ import UpdatedCard from "@/components/Updatednews/UpdatedCard";
 const fetchArticle = async () => {
   // console.log(id, "here");
   try {
-    const result = await fetch(`http://localhost:3001/todays_news/`, {
-      next: { revalidate: 120 },
-      cache: "no-store",
+    const result = await fetch(`https://server-for-quiver.onrender.com/todays_news/`, {
+      next: { revalidate: 300 }
     });
     if (!result.ok) {
       throw new Error("Failed to fetch data");
@@ -23,7 +22,7 @@ const fetchArticle = async () => {
 
 export default async function Home() {
   const todaysnews = await fetchArticle();
-  console.log(todaysnews);
+
   return (
     <main className={styles.main}>
       <div className={styles.container}>
