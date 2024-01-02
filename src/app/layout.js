@@ -3,7 +3,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar/Navbar'
 import styles from './layout.module.css'
 import Footer from '@/components/Footer/Footer'
-
+import Head from 'next/head'
 
 export const metadata = {
   title: 'Create Next App',
@@ -13,7 +13,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      
+       <Head>
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
       <body className={styles.layout}>
       <Navbar />
         {children}

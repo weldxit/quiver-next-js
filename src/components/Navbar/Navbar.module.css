@@ -131,4 +131,8 @@
 /* monitor */
 @media screen and (min-width: 1200px) {
     /* Styles for extra-large screens and high-resolution displays */
+    .updates-scroller-container{
+      color: black;
+      width: 67%;
+    }
   }

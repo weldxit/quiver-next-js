@@ -6,7 +6,7 @@ import styles from "./[category_id].module.css";
 import Norecord from "@/components/NoRecord/Norecord";
 
 const getnewsBycategory = async (catid,page) => {
-  console.log(catid,page);
+
   try {
     const result = await fetch(`http://localhost:3001/category-web/${catid}?page=${page}`, {cache:"no-store"});
     if (!result.ok) {
@@ -24,7 +24,7 @@ const getnewsBycategory = async (catid,page) => {
 // ... (imports and other code)
 
 export default async function SingleCategory({ searchParams }) {
-  console.log(searchParams);
+
   let id = parseInt(searchParams.id, 10);
   let page = parseInt(searchParams.page, 10);
 

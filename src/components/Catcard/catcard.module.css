@@ -89,3 +89,21 @@
       font-size: 0.9rem;
     }
   }
+
+  @media screen and (min-width: 1200px) {
+  
+  .news-card{
+    height: 16rem;
+    justify-content: center;
+    width: 100%;
+  }
+  .news-title{
+    line-height: 2rem;
+    height: auto;
+  }
+  .news-content{
+    align-self: center;
+    width: 100%;
+
+  }
+  }

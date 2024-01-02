@@ -137,13 +137,12 @@
 
 .confetti{
   display: flex;
-  height: 200px;
-  width: 1500;
+  justify-content: center;
 }
 
 @media screen and (max-width: 576px) {
   .main{
-    margin-bottom: 1rem;
+    padding-bottom: 1rem;
   }
 .container{
     flex-direction: column;
@@ -175,6 +174,7 @@
 }
 .thank-you-container{
   display: flex;
+  justify-content: center;
 }
 .article-title {
   font-size: 1.2rem;

@@ -95,5 +95,29 @@
       justify-content: center;
     }
     
+  }
+
+  @media screen and (min-width: 1200px) {
   
+    .news-card{
+      width: 22.5rem;
+    }
+    .news-image{
+      object-fit: fill;
+      border-radius: 0.6rem;
+      height: 7rem;
+      width: 8rem;
+    }
+    .image-with-content{
+      /* justify-content: space-evenly; */
+    }
+    .news-title{
+      height: auto;
+    }
+    .news-description{
+      padding-right: 1rem;
+      margin-bottom: 0;
+    } 
+    
+    
   }
