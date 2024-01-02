@@ -35,7 +35,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchScroll = async () => {
       try {
-        const news = await fetch('http://localhost:3001/todays_news');
+        const news = await fetch('https://server-for-quiver.onrender.com/todays_news');
         const res = await news.json();
         // Extract titles from the result
         const extractedTitles = res.map((item) => item.title);
