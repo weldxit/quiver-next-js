@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 const fetchArticle = async (id) => {
   // console.log(id, "here");
   try {
-    const result = await fetch(`http://localhost:3001/todays_news/${id}`, {
+    const result = await fetch(`https://server-for-quiver.onrender.com/todays_news/${id}`, {
       next: { revalidate: 120 },
     });
     if (!result.ok) {
@@ -23,7 +23,7 @@ const fetchArticle = async (id) => {
 };
 const fetchRelated = async () => {
   try {
-    const result = await fetch(`http://localhost:3001/maymisseddata`, {
+    const result = await fetch(`https://server-for-quiver.onrender.com/maymisseddata`, {
       next: { revalidate: 60 },
     });
     if (!result.ok) {
