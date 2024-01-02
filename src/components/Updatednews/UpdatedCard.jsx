@@ -1,7 +1,7 @@
-
+// components/NewsCard.js
 import React from 'react';
 import Image from 'next/image';
-import styles from './RelatedArticle.module.css'; // Import the CSS module for styling
+import styles from './update.module.css'; // Import the CSS module for styling
 function formatDate(timestamp) {
   const months = [
     "Jan",
@@ -37,24 +37,22 @@ function formatDate(timestamp) {
 
   return { formattedDate, formattedTime };
 }
-const RelatedArticle = ({ id, title, content, imageLink, postedAt }) => {
+const UpdatedCard = ({ id, title, content, imageLink, postedAt }) => {
   const { formattedDate, formattedTime } = formatDate(postedAt)
-
-    // console.log(imageLink,'img link')
   return (
     <div className={styles['news-card']} key={id}>
-      {/* <Image src={imageLink} alt={title} className={styles['news-image']} width={150} height={150}/> */}
-      <div className={styles['news-content']}>
-        <div className={styles["upper"]}>
+      <div className={styles['news-content']}> 
+      <Image src={imageLink} alt={title} className={styles['news-image']} width={100} height={80}/>
+      
+        <div className={styles['image-with-content']}>
         <h2 className={styles['news-title']}>{title}</h2>
-              <Image src={imageLink} alt={title} className={styles['news-image']} width={150} height={180}/>
-
-        </div>
         <p className={styles['news-description']}>{content}</p>
-        <p className={styles['posted-at']}>Posted at : { formattedDate} | {formattedTime }</p>
+        </div>
+        
+        {/* <p className={styles['posted-at']}>Posted at: {formattedDate}, {formattedTime}</p> */}
       </div>
     </div>
   );
 };
 
-export default RelatedArticle;
+export default UpdatedCard;

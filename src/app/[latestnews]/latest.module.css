@@ -12,7 +12,15 @@
   .grid-container{
     display: flex;
     justify-content: center;
+    flex-direction: column;
     /* height: 96vh; */
+  }
+  .route {
+   font-size: 1.5rem;
+   font-weight: bold;
+   padding-left: 0.5rem;
+   margin-bottom: 1rem;
+   color: red;
   }
   .center {
     display: grid;

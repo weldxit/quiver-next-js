@@ -5,20 +5,25 @@
     justify-content: center;
     background-color: white;
     align-items: center; /* Added for center alignment */
-    padding: 1rem; /* Added padding for better spacing */
+    /* padding: 1rem; Added padding for better spacing */
   }
   
-  .banner-image-container {
-    margin-bottom: 1rem; /* Added margin at the bottom */
-  }
+
   
   .updates-scroller-container {
+    width: 83.5%;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
     /* Add styles for updates scroller if needed */
   }
   
   .category-route-container {
     display: flex;
-    flex-wrap: wrap; /* Allow buttons to wrap */
+    margin-bottom: 1rem;
+    /* background-color: black; */
+    /* flex-wrap: wrap; Allow buttons to wrap */
     gap: 0.5rem; /* Add gap between buttons */
     justify-content: center; /* Center the buttons */
   }
@@ -33,13 +38,36 @@
     background-color: rgb(28, 26, 26);
     color: white;
     padding: 0.8rem 1rem;
-    /* margin: 0.3rem; Adjust margin for spacing between buttons */
+    transition: background-color 0.3s ease, color 0.3s ease;
     text-decoration: none; /* Remove default link underline */
-    transition: background-color 0.3s ease;
+    
+  }
+  .button-container{
+    display: flex;
+    flex: 1;
+    gap: 0.5rem;
+  }
+  .blink {
+    background-color: rgb(255, 136, 0);
+    color: rgb(255, 255, 255);
+    animation: blinker 1s linear infinite; /* Blink animation */
   }
   
+  @keyframes blinker {
+    50% {
+        background-color: rgb(255, 0, 0);
+        /* color: rgb(0, 0, 0); */
+      opacity: 1; /* Hide the element at 50% of the animation */
+    }
+  }
   .buttons:hover {
-    background-color: #333; /* Darken the button on hover */
+    background-color: #be62e2; /* Darken the button on hover */
+    color: yellow; /* Change text color on hover */
+  }
+
+ .buttons.active {
+    background-color: #6100b6; /* Change background color for active link */
+    color: white; /* Change text color for active link */
   }
   
   .text {
@@ -47,3 +75,60 @@
     font-weight: bold;
   }
   
+
+
+
+/* mobile  */
+@media screen and (max-width: 576px) {
+    /* Styles for phones (portrait mode) */
+    .buttons{
+      height: 10px;
+    }
+    .button-container{
+      display: flex;
+      width: 365px;
+      justify-content: space-between;
+      gap: 0.5rem;
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+    .button-container::-webkit-scrollbar{
+      display: none;
+      width: 0;
+    }
+    .updates-scroller-container{
+      width: 96.5%;
+    }
+    .banner-image-container {
+      margin-bottom: 0; /* Added margin at the bottom */
+    }
+  }
+  
+
+/* tablet */
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    /* Styles for tablets and larger phones (landscape mode) */
+    .buttons{
+        height: 10px;
+    } 
+    .category-route-container{
+      display: none;
+    }
+}
+
+/* laptop */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    /* Styles for smaller laptops, larger tablets in landscape */
+    .buttons{
+      height: 10px;
+  } 
+  }
+  /* desktop */
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    /* Styles for larger desktop screens and some laptops */
+  }
+  
+/* monitor */
+@media screen and (min-width: 1200px) {
+    /* Styles for extra-large screens and high-resolution displays */
+  }

@@ -3,8 +3,9 @@ import React from 'react'
 import styles from './Navbar.module.css'
 import Link from 'next/link';
 import Image from 'next/image';
+import NewsTicker from '../NewsTicker/NewsTicker';
 import Banner from '../Banner/Banner';
-
+import { useEffect, useState} from 'react';
 const tags = [
   { id: 0, name: "Home", alias: "ସମସ୍ତ" },
   { id: 1, name: "Politics", alias: "ରାଜନୀତି" },
@@ -21,26 +22,59 @@ const tags = [
   
 ];
 
+const latestNews = [
+  'Breaking news: Something happened!',
+  'New feature updates are live now!',
+  'Stay tuned for our upcoming event!',
+];
+
 export default function Navbar() {
+  const [scrollnews, setScrollnews] = useState([])
+  const [activeLink, setActiveLink] = useState(0); 
+
+  useEffect(() => {
+    const fetchScroll = async () => {
+      try {
+        const news = await fetch('http://localhost:3001/todays_news');
+        const res = await news.json();
+        // Extract titles from the result
+        const extractedTitles = res.map((item) => item.title);
+        setScrollnews(extractedTitles);
+      } catch (error) {
+        console.error('Error fetching scroll news:', error);
+      }
+    };
+
+    fetchScroll();
+  }, []);
   return (
     <div className={styles['container']}>
       <div className={styles['banner-image-container']}>
           <Banner />
       </div>
       <div className={styles['updates-scroller-container']}>
-
+      <NewsTicker news={scrollnews} />
       </div>
-      <div className={styles['category-route-container']}>
-      {
-        tags.map((item,i)=>{
-          // console.log(item)
-          return(
-            <Link href={item.id==0 ? `/` :`/category/${item.name.toLocaleLowerCase()}?id=${item.id}`} key={item.id}  className={styles['buttons']}><span className={styles['text']}>{item.name}</span></Link>
-
-          )
-        })
-      }
+     <div className={styles['category-route-container']}>
+      <div className={styles['button-container']}>
+      {tags.map((item, i) => {
+        return (
+          <Link
+            href={item.id === 0 ? `/` : `/category/${item.name.toLocaleLowerCase()}?id=${item.id}`}
+            key={item.id}
+            className={`${styles['buttons']} ${activeLink === item.id ? styles['active'] : ''} ${
+              i === tags.length - 1 ? styles['blink'] : '' // Apply blink class to the last link
+            }`}
+            onClick={()=>{}}
+            onMouseEnter={() => setActiveLink(item.id)} // Set active link on hover
+            onMouseLeave={() => setActiveLink(0)} // Reset active link on mouse leave
+          >
+            <span className={styles['text']}>{item.name}</span>
+          </Link>
+        );
+      })}
       </div>
+    </div>
     
     </div>
   )

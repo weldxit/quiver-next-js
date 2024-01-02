@@ -1,0 +1,99 @@
+/* components/NewsCard.module.css */
+.news-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    /* margin: 20px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    width: 23.5rem;
+    height: 15vh;
+    /* background-color: black; */
+    margin:0;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+
+  .news-image {
+    /* width: 150px;
+    height: auto; */
+    object-fit: contain;
+    border-radius: 0.6rem;
+    align-self: safe;
+  }
+  
+  .news-content {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+  
+  .image-with-content{
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    /* justify-content: space-between; */
+  }
+  .news-title {
+    /* text-align: justify; */
+    font-size: 1rem;
+    padding-left: 1rem;
+    /* margin-bottom: 10px; */
+    overflow-y: hidden;
+    display: -webkit-box;
+    height: 3.5rem;
+    -webkit-line-clamp: 2; /* Limit to 5 lines */
+    -webkit-box-orient: vertical;
+  }
+  
+  .news-description {
+    font-size: 0.8rem;
+    color: #555;
+    height: 3.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    /* margin-bottom: 10px; */
+  }
+  
+  .posted-at {
+    font-size: 0.8rem;
+    color: #888;
+    padding-top: 0.5rem;
+    /* padding-bottom: 0.5rem; */
+  }
+  
+
+  @media screen and (max-width: 576px) {
+    /* Styles for tablets and larger phones (landscape mode) */
+    .news-card{
+      width: 22.5rem;
+      height: auto;
+      justify-content: space-around;
+      margin-bottom: 0;
+    }
+    .news-title{
+      height: auto;
+      padding-left: 0;
+    }
+    .news-content{
+      padding: 0;
+      grid-template-columns: 1fr 2fr;
+      height: 5rem;
+      gap: 1.2rem;
+    }
+    .news-description{
+      display: none;
+      visibility: none;
+    }
+    .news-image{
+
+    }
+    .image-with-content{
+      justify-content: center;
+    }
+    
+  
+  }

@@ -179,6 +179,9 @@ export default function Snglearticle({ params }) {
             <p>{contentWithBreaks}</p>
           </div>
         </div>
+        <div className={styles['thank-you-container']}>
+          thanks a lot 
+        </div>
         <div className={styles["related-container"]}>
           <span className={styles["scroll-down"]}>Scroll down for more..</span>
 
@@ -192,39 +195,57 @@ export default function Snglearticle({ params }) {
                   content={news.content}
                   imageLink={news.image}
                   postedAt={news.posted_at}
-      
                 />
               </Link>
             );
           })}
         </div>
         <div className={styles["next-prev"]}>
-          <button
-            onClick={() => updateArticle(currentIndex + 1)}
-            className={styles["next-button"]}
-          >
+          {activeIndex < relatedNews.length ? (
+            <button
+              onClick={() => updateArticle(currentIndex + 1)}
+              className={styles["next-button"]}
+            >
+              <Image
+                src={"/assets/pagignation/active-greaterthan.png"}
+                alt="next"
+                width={30}
+                height={30}
+              />
+            </button>
+          ) : (
             <Image
-              src={"/assets/pagignation/active-greaterthan.png"}
+              src={"/assets/pagignation/disabled-greaterthan.png"}
               alt="next"
               width={30}
               height={30}
             />
-          </button>
-          <button
-            onClick={() => updateArticle(currentIndex - 1)}
-            className={styles["next-button"]}
-          >
+          )}
+
+          {activeIndex == 0 ? (
             <Image
-              src={"/assets/pagignation/active-lessthan.png"}
+              src={"/assets/pagignation/disabled-lessthan.png"}
               alt="next"
               width={30}
               height={30}
             />
-          </button>
+          ) : (
+            <button
+              onClick={() => updateArticle(currentIndex - 1)}
+              className={styles["next-button"]}
+            >
+              <Image
+                src={"/assets/pagignation/active-lessthan.png"}
+                alt="next"
+                width={30}
+                height={30}
+              />
+            </button>
+          )}
         </div>
       </div>
       <div className={styles["confetti"]}>
-        <ConfettiComponent />
+        <ConfettiComponent text="Y" width={10} height={10}/>
       </div>
     </div>
   );
