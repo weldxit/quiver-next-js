@@ -8,7 +8,7 @@ import Norecord from "@/components/NoRecord/Norecord";
 const getnewsBycategory = async (catid,page) => {
 
   try {
-    const result = await fetch(`http://localhost:3001/category-web/${catid}?page=${page}`, {next:{revalidate:60}});
+    const result = await fetch(`https://server-for-quiver.onrender.com/category-web/${catid}?page=${page}`, {next:{revalidate:60}});
     if (!result.ok) {
       throw new Error("Failed to fetch data");
     }
